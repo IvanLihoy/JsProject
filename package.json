@@ -1,0 +1,19 @@
+{
+  "name": "hillel_test_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webdriverio": "^4.8.0"
+  },
+  "devDependencies": {
+    "wdio-json-reporter": "^0.2.1",
+    "wdio-mocha-framework": "^0.5.11",
+    "wdio-spec-reporter": "^0.1.2"
+  }
+}
