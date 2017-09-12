@@ -10,10 +10,10 @@ describe('login and enter the chat', function() {
     it('should be able to login from 2 accounts', function() {
         LoginPage.inputLoginCreds(
             LoginPage.usernameInputA, LoginPage.passwordInputA, 
-            'elena.chornobai@gmail.com', 'hillelproject123');
+            'Daniel_Johanf@protonmail.com', '1q2w3e4r5t6y7u8i');
         LoginPage.inputLoginCreds(
             LoginPage.usernameInputB, LoginPage.passwordInputB, 
-            'echornobai@intersog.com', 'hillelproject000');
+            'james.m.traylor@protonmail.com', '1q2w3e4r5t6y7u8i');
         browser.sync();
         LoginPage.submitFormAndLogin();
     })
