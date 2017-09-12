@@ -38,14 +38,25 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'firefox'
-    }],
+    capabilities: {
+        browserA: {
+            browserName: "chrome",
+            args: [
+                //"headless",
+                "use-fake-device-for-media-stream",
+                "use-fake-ui-for-media-stream"
+            ]
+        }
+    },
+    browserB: {
+        browserName: "chrome",
+        args: [
+            //"headless",
+            "use-fake-device-for-media-stream",
+            "use-fake-ui-for-media-stream"
+        ]
+    },
+
     //
     // ===================
     // Test Configurations
@@ -72,10 +83,10 @@ exports.config = {
     //
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
-    baseUrl: 'http://localhost',
+    baseUrl: 'https://hilleltest.slack.com/',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 6000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -106,7 +117,9 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+     services: ['chromedriver'],
+     port: 9515,
+     path: '/',
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -124,7 +137,8 @@ exports.config = {
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: 40000,
     },
     //
     // =====
@@ -156,9 +170,12 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // before: function (capabilities, specs) {
-    // },
-    //
+     before: function (capabilities, specs) {
+         browser.timeouts('implicit', 6000);
+         const chai = require('chai');
+         global.expect = chai.expect;
+     },
+    
     /**
      * Hook that gets executed before the suite starts
      * @param {Object} suite suite details
